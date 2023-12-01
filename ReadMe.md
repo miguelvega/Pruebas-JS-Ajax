@@ -15,7 +15,10 @@ describe ('Jasmine basic check', function() {
 }); 
 
 ```
-Ejecutamos nuestras pruebas en la terminal para realizar la comprobacion de que todo esta funcionando como lo esperado 
+Ejecutamos nuestras pruebas en la terminal, para realizar la comprobacion de que todo esta funcionando como lo esperado, basicamente la prueba en el archivo spec/javascripts/basic_check_spec.js verifica que la expresión true es, de hecho, verdadera, entonces la prueba pasara; de lo contrario, si colocamos otro valor por ejemplo, false,  se informarán que la prueba fallo.
+
+
+![Captura de pantalla de 2023-12-01 17-58-06](https://github.com/miguelvega/Pruebas-JS-Ajax/assets/124398378/07763b2c-3960-497f-a130-c0191385e436)
 
 Luego, ejecutamos el comando bin/rails server desde nuestro directorio raiz para ejecutar las pruebas al dirigirnos a localhost:3000/specs 
 
