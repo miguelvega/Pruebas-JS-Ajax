@@ -37,7 +37,7 @@ La estructura básica de los casos de prueba de Jasmine se hace evidente en el c
 La secuencia de puntuación }); prevalece porque `describe` e `it` son funciones JavaScript de dos argumentos, el segundo de los cuales es una función sin argumentos.
 
 ### Pregunta: Experimenta el siguiente código de especificaciones (specs) de Jasmine del camino feliz del código AJAX llamado movie_popup_spec.js
-´´´javascript
+```javascript
 describe('MoviePopup', function() {
   describe('setup', function() {
     it('adds popup Div to main page', function() {
@@ -71,24 +71,24 @@ describe('MoviePopup', function() {
     });
   });
 });
-´´´
+```
 
 
 
 
 ### Pregunta ¿Que hacen las siguientes líneas del código anterior?. ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado.
 
-´´´javascript
+```javascript
 it('calls correct URL', function() {
       spyOn($, 'ajax');
       $('#movies a').trigger('click');
       expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');
     });
-´´´
+```
 
 ### Pregunta:¿Que hacen las siguientes líneas del código anterior?.
 
-´´´´javascript
+```javascript
 
  let htmlResponse = readFixtures('movie_info.html');
         spyOn($, 'ajax').and.callFake(function(ajaxArgs) { 
@@ -102,11 +102,11 @@ it('calls correct URL', function() {
       it('places movie title in #movieInfo', function() {
         expect($('#movieInfo').text()).toContain('Casablanca');
 
-´´´´
+```
 
 ### Pregunta: Dado que Jasmine carga todos los ficheros JavaScript antes de ejecutar ningún ejemplo, la llamada a setup (línea 34 del codigo siguiente llamado movie_popup.js)ocurre antes de que se ejecuten nuestras pruebas, comprueba que dicha función hace su trabajo y muestra los resultados.
 
-´´´javascript
+```javascript
 
 var MoviePopup = {
   setup: function() {
@@ -144,7 +144,7 @@ var MoviePopup = {
 $(MoviePopup.setup);
 
 
-´´´
+```
 
 ### Pregunta: Indica cuales son los stubs y fixtures disponibles en Jasmine y Jasmine-jQuery.
 
