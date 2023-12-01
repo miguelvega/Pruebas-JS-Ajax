@@ -78,6 +78,8 @@ describe('MoviePopup', function() {
 
 ### Pregunta ¿Que hacen las siguientes líneas del código anterior?. ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado.
 
+
+
 ```javascript
 it('calls correct URL', function() {
       spyOn($, 'ajax');
@@ -87,6 +89,11 @@ it('calls correct URL', function() {
 ```
 
 ### Pregunta:¿Que hacen las siguientes líneas del código anterior?.
+
+La línea de código `it('calls correct URL', function() {...}` define un ejemplo específico de prueba dentro de un bloque describe en Jasmine para corroborar que la prueba verifique que se realice una llamada a la URL correcta.
+la linea `spyOn($, 'ajax');` dentro del codigo anterior, se utiliza spyOn de Jasmine para crear un espía en la función ajax de jQuery  para rastrear llamadas a una función y observar su comportamiento durante las pruebas, lo que permitira rastrear las llamadas a la función ajax durante la ejecución de la prueba sin cambiar su comportamiento.
+La siguiente linea `$('#movies a').trigger('click');` simula la acción del usuario al hacer clic en un enlace de películas, lo que debería activar una llamada Ajax.
+Finalemente, `expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');`   en esta linea estamos usando la funcionalidad del espía creado por spyOn para realizar una afirmación. Verifica que la última llamada a la función ajax se haya hecho con la URL esperada ('/movies/1'). Con ello simulamos que el clic en el enlace de películas haya realizado una llamada Ajax con la URL correcta, con el fin de verificar que la lógica relacionada con Ajax se está ejecutando correctamente.
 
 ```javascript
 
