@@ -25,7 +25,12 @@ Recordemos que las operaciones Ajax son asíncronas, por ello se requiere un man
 
 ### Pregunta: ¿Qué son los stubs, espias y fixture en Jasmine para realizar pruebas de Ajax?
 
-Antes de responder la pregunta, vamos recordar algunos conceptos:
-
 . Stubs (conocido como simulaciones o reemplazos):  Los stubs son como actores de reemplazo en las pruebas. Imaginemos que tenemos una función que hace una llamada Ajax. En lugar de usar la función real durante las pruebas, empleamos un "doble" (stub) que simula la llamada Ajax y devuelve datos predefinidos. Esto nos da control sobre lo que la llamada debería producir, lo que nos permite  predecir la salida de la llamada Ajax en el entorno de prueba.
+
+. Espiás: Los espiás son como observadores como su mismo nombre lo dice. En el contexto de pruebas de Ajax, podemos usar un espía para "observar" funciones que hacen llamadas Ajax. Esto significa que el espía registra cuándo y cómo se llaman estas funciones, así como qué argumentos se les pasan. Es útil para verificar si las operaciones Ajax se están ejecutando correctamente y con los datos esperados.
+
+. Fixture: Un fixture es como un guion predefinido. En Jasmine y las pruebas de Ajax, un fixture es un conjunto de datos de prueba que simula la respuesta de una llamada Ajax. Imaginemos que necesitamos probar cómo la aplicación maneja la respuesta de un servidor. Utilizamos un fixture para simular esa respuesta, permitiéndote establecer condiciones predecibles para tus pruebas. Es como crear el escenario perfecto para nuestras pruebas, dándole condiciones controladas y predecibles. Combinando esto con stubs tenemos un control total en tus pruebas de Ajax.
+
+
+
 
