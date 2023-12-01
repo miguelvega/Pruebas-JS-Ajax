@@ -32,5 +32,119 @@ Recordemos que las operaciones Ajax son asíncronas, por ello se requiere un man
 . Fixture: Un fixture es como un guion predefinido. En Jasmine y las pruebas de Ajax, un fixture es un conjunto de datos de prueba que simula la respuesta de una llamada Ajax. Imaginemos que necesitamos probar cómo la aplicación maneja la respuesta de un servidor. Utilizamos un fixture para simular esa respuesta, permitiéndote establecer condiciones predecibles para tus pruebas. Es como crear el escenario perfecto para nuestras pruebas, dándole condiciones controladas y predecibles. Combinando esto con stubs tenemos un control total en tus pruebas de Ajax.
 
 
+La estructura básica de los casos de prueba de Jasmine se hace evidente en el código siguiente como en RSpec, Jasmine utiliza `it` para especificar un único ejemplo y bloques `describe` anidados para agrupar conjuntos de ejemplos relacionados. Tal y como ocurre en RSpec, `describe` e `it` reciben un bloque de código como argumento, pero mientras que en Ruby los bloques de código están delimitados por `do. . . end`, en JavaScript son funciones anónimas (funciones sin nombre) sin argumentos.
 
+La secuencia de puntuación }); prevalece porque `describe` e `it` son funciones JavaScript de dos argumentos, el segundo de los cuales es una función sin argumentos.
+
+### Pregunta: Experimenta el siguiente código de especificaciones (specs) de Jasmine del camino feliz del código AJAX llamado movie_popup_spec.js
+´´´javascript
+describe('MoviePopup', function() {
+  describe('setup', function() {
+    it('adds popup Div to main page', function() {
+      expect($('#movieInfo')).toExist();
+    });
+    it('hides the popup Div', function() {
+      expect($('#movieInfo')).toBeHidden();
+    });
+  });
+  describe('clicking on movie link', function() {
+    beforeEach(function() { loadFixtures('movie_row.html'); });
+    it('calls correct URL', function() {
+      spyOn($, 'ajax');
+      $('#movies a').trigger('click');
+      expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');
+    });
+    describe('when successful server call', function() {
+      beforeEach(function() {
+        let htmlResponse = readFixtures('movie_info.html');
+        spyOn($, 'ajax').and.callFake(function(ajaxArgs) { 
+          ajaxArgs.success(htmlResponse, '200');
+        });
+        $('#movies a').trigger('click');
+      });
+      it('makes #movieInfo visible', function() {
+        expect($('#movieInfo')).toBeVisible();
+      });
+      it('places movie title in #movieInfo', function() {
+        expect($('#movieInfo').text()).toContain('Casablanca');
+      });
+    });
+  });
+});
+´´´
+
+
+
+
+### Pregunta ¿Que hacen las siguientes líneas del código anterior?. ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado.
+
+´´´javascript
+it('calls correct URL', function() {
+      spyOn($, 'ajax');
+      $('#movies a').trigger('click');
+      expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');
+    });
+´´´
+
+### Pregunta:¿Que hacen las siguientes líneas del código anterior?.
+
+´´´´javascript
+
+ let htmlResponse = readFixtures('movie_info.html');
+        spyOn($, 'ajax').and.callFake(function(ajaxArgs) { 
+          ajaxArgs.success(htmlResponse, '200');
+        });
+        $('#movies a').trigger('click');
+      });
+      it('makes #movieInfo visible', function() {
+        expect($('#movieInfo')).toBeVisible();
+      });
+      it('places movie title in #movieInfo', function() {
+        expect($('#movieInfo').text()).toContain('Casablanca');
+
+´´´´
+
+### Pregunta: Dado que Jasmine carga todos los ficheros JavaScript antes de ejecutar ningún ejemplo, la llamada a setup (línea 34 del codigo siguiente llamado movie_popup.js)ocurre antes de que se ejecuten nuestras pruebas, comprueba que dicha función hace su trabajo y muestra los resultados.
+
+´´´javascript
+
+var MoviePopup = {
+  setup: function() {
+    // add hidden 'div' to end of page to display popup:
+    let popupDiv = $('<div id="movieInfo"></div>');
+    popupDiv.hide().appendTo($('body'));
+    $(document).on('click', '#movies a', MoviePopup.getMovieInfo);
+  }
+  ,getMovieInfo: function() {
+    $.ajax({type: 'GET',
+            url: $(this).attr('href'),
+            timeout: 5000,
+            success: MoviePopup.showMovieInfo,
+            error: function(xhrObj, textStatus, exception) { alert('Error!'); }
+            // 'success' and 'error' functions will be passed 3 args
+           });
+    return(false);
+  }
+  ,showMovieInfo: function(data, requestStatus, xhrObject) {
+    // center a floater 1/2 as wide and 1/4 as tall as screen
+    let oneFourth = Math.ceil($(window).width() / 4);
+    $('#movieInfo').
+      css({'left': oneFourth,  'width': 2*oneFourth, 'top': 250}).
+      html(data).
+      show();
+    // make the Close link in the hidden element work
+    $('#closeLink').click(MoviePopup.hideMovieInfo);
+    return(false);  // prevent default link action
+  }
+  ,hideMovieInfo: function() {
+    $('#movieInfo').hide();
+    return(false);
+  }
+};
+$(MoviePopup.setup);
+
+
+´´´
+
+### Pregunta: Indica cuales son los stubs y fixtures disponibles en Jasmine y Jasmine-jQuery.
 
