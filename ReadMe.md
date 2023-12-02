@@ -20,7 +20,12 @@ Ejecutamos nuestras pruebas en la terminal, para realizar la comprobacion de que
 
 ![Captura de pantalla de 2023-12-01 17-58-06](https://github.com/miguelvega/Pruebas-JS-Ajax/assets/124398378/07763b2c-3960-497f-a130-c0191385e436)
 
-Luego, ejecutamos el comando bin/rails server desde nuestro directorio raiz para ejecutar las pruebas al dirigirnos a localhost:3000/specs 
+Agregamos //= link boot0.js en manifest.js para ver las pruebas en localhost:3000/specs al ejecutar en nuestro directorio raiz rails server, con lo cual se muestra lo siguiente: 
+
+
+![Captura de pantalla de 2023-12-01 22-07-23](https://github.com/miguelvega/Pruebas-JS-Ajax/assets/124398378/2bd7aa9e-f847-4653-8844-a367655be510)
+
+Como podemos apreciar, si bien la salida nos dice que se cargo correctamete la aplicación, se puede observar que no se cargan todos los datos,
 
 ### Pregunta: ¿Cuáles son los problemas que se tiene cuando se debe probar Ajax?. Explica tu respuesta.
 
