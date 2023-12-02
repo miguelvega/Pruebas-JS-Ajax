@@ -3686,3 +3686,47 @@ Processing by JasmineRails::SpecRunnerController#index as HTML
 Completed 200 OK in 17ms (Views: 15.2ms | ActiveRecord: 0.0ms | Allocations: 14960)
 
 
+Started GET "/" for 127.0.0.1 at 2023-12-01 23:28:53 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/movies" for 127.0.0.1 at 2023-12-01 23:28:53 -0500
+Processing by MoviesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering movies/index.html.erb within layouts/application
+  [1m[36mMovie Load (0.2ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+  ↳ app/views/movies/index.html.erb:11
+  Rendered movies/index.html.erb within layouts/application (Duration: 13.5ms | Allocations: 19465)
+  Rendered layout layouts/application.html.erb (Duration: 68.6ms | Allocations: 64250)
+Completed 200 OK in 99ms (Views: 71.0ms | ActiveRecord: 0.8ms | Allocations: 75314)
+
+
+Started GET "/specs" for 127.0.0.1 at 2023-12-01 23:28:57 -0500
+Processing by JasmineRails::SpecRunnerController#index as HTML
+  Rendering layout .bundle/ruby/3.0.0/gems/jasmine-rails-0.15.0/app/views/layouts/jasmine_rails/spec_runner.html.erb
+  Rendering .bundle/ruby/3.0.0/gems/jasmine-rails-0.15.0/app/views/jasmine_rails/spec_runner/index.html.erb within layouts/jasmine_rails/spec_runner
+  Rendered .bundle/ruby/3.0.0/gems/jasmine-rails-0.15.0/app/views/jasmine_rails/spec_runner/index.html.erb within layouts/jasmine_rails/spec_runner (Duration: 0.5ms | Allocations: 124)
+  Rendered layout .bundle/ruby/3.0.0/gems/jasmine-rails-0.15.0/app/views/layouts/jasmine_rails/spec_runner.html.erb (Duration: 9.3ms | Allocations: 13698)
+Completed 200 OK in 13ms (Views: 11.5ms | ActiveRecord: 0.0ms | Allocations: 14960)
+
+
+Started GET "/" for 127.0.0.1 at 2023-12-01 23:33:07 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/movies" for 127.0.0.1 at 2023-12-01 23:33:07 -0500
+Processing by MoviesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering movies/index.html.erb within layouts/application
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+  ↳ app/views/movies/index.html.erb:11
+  Rendered movies/index.html.erb within layouts/application (Duration: 15.7ms | Allocations: 19465)
+  Rendered layout layouts/application.html.erb (Duration: 447.1ms | Allocations: 188600)
+Completed 200 OK in 465ms (Views: 448.3ms | ActiveRecord: 1.1ms | Allocations: 199671)
+
+
+Started GET "/specs" for 127.0.0.1 at 2023-12-01 23:33:10 -0500
+Processing by JasmineRails::SpecRunnerController#index as HTML
+  Rendering layout .bundle/ruby/3.0.0/gems/jasmine-rails-0.15.0/app/views/layouts/jasmine_rails/spec_runner.html.erb
+  Rendering .bundle/ruby/3.0.0/gems/jasmine-rails-0.15.0/app/views/jasmine_rails/spec_runner/index.html.erb within layouts/jasmine_rails/spec_runner
+  Rendered .bundle/ruby/3.0.0/gems/jasmine-rails-0.15.0/app/views/jasmine_rails/spec_runner/index.html.erb within layouts/jasmine_rails/spec_runner (Duration: 0.5ms | Allocations: 129)
+  Rendered layout .bundle/ruby/3.0.0/gems/jasmine-rails-0.15.0/app/views/layouts/jasmine_rails/spec_runner.html.erb (Duration: 20.1ms | Allocations: 14537)
+Completed 200 OK in 24ms (Views: 22.8ms | ActiveRecord: 0.0ms | Allocations: 15803)
+
+
