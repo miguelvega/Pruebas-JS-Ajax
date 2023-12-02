@@ -20,12 +20,47 @@ Ejecutamos nuestras pruebas en la terminal, para realizar la comprobacion de que
 
 ![Captura de pantalla de 2023-12-01 17-58-06](https://github.com/miguelvega/Pruebas-JS-Ajax/assets/124398378/07763b2c-3960-497f-a130-c0191385e436)
 
-Agregamos //= link boot0.js en manifest.js para ver las pruebas en localhost:3000/specs al ejecutar en nuestro directorio raiz rails server, con lo cual se muestra lo siguiente: 
+Agregamos `//= link boot0.js` en `manifest.js` para ver las pruebas en localhost:3000/specs al ejecutar en nuestro directorio raiz rails server, con lo cual se muestra lo siguiente: 
 
 
 ![Captura de pantalla de 2023-12-01 22-07-23](https://github.com/miguelvega/Pruebas-JS-Ajax/assets/124398378/2bd7aa9e-f847-4653-8844-a367655be510)
 
-Como podemos apreciar, si bien la salida nos dice que se cargo correctamete la aplicación, se puede observar que no se cargan todos los datos,
+Como podemos apreciar, si bien la salida nos dice que se cargo correctamete la aplicación, sin embargo no se cargan todos los datos.
+
+Por tal motivo,  como alternatica realizamos lo siguientes pasos : 
+
+Usamos Jasmine for Browsers <br>
+
+Agregue Jasmine a su paquete.json <br> 
+
+`npm install --save-dev jasmine-browser-runner jasmine-core`
+
+Inicializa Jasmine en tu proyecto <br> 
+
+`npx jasmine-browser-runner init`
+
+Configure Jasmine como su script de prueba en su paquete.json 
+
+```
+{
+  "scripts": {
+    "test": "jasmine-browser-runner runSpecs"
+  }
+}
+
+
+
+``` 
+
+Ejecute sus pruebas <br>
+
+`npm test`
+
+Y nos muestra las pruebas en el navegador : 
+
+
+![Captura de pantalla de 2023-12-01 23-25-20](https://github.com/miguelvega/Pruebas-JS-Ajax/assets/124398378/9d017002-f958-4a88-b40f-fe9d155c1f53)
+
 
 ### Pregunta: ¿Cuáles son los problemas que se tiene cuando se debe probar Ajax?. Explica tu respuesta.
 
