@@ -120,17 +120,16 @@ describe('MoviePopup', function() {
 
 Este error suele ocurrir cuando jQuery no se ha cargado correctamente antes de que se ejecuten las pruebas, esto debido a que "ReferenceError: $ is not defined" indica que en el momento en que Jasmine está ejecutando las pruebas, la biblioteca jQuery ($) no está disponible.
 
-### Pregunta ¿Que hacen las siguientes líneas del código anterior?. ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado.
+### Pregunta ¿Que hacen las líneas del código anterior?.
 
-El codigo anterior inicia un bloque de pruebas relacionado con el componente MoviePopup, ademas todas las pruebas dentro de este bloque se centraran en este componente específico. Ahora, vamos a analizar el bloque `escribe('setup', function() {...}`, este bloque  organiza pruebas relacionadas con la configuración inicial del componente MoviePopup. Cada prueba dentro de este bloque se centra en aspectos específicos de la configuración inicial y verifica si el componente se encuentra en el estado deseado después de la configuración. El siguiente bloque `describe('clicking on movie link', function() {}`verifica que al hacer clic en un enlace de películas, se realiza una llamada Ajax a la URL '/movies/1'. Se utiliza spyOn para rastrear las llamadas a la función ajax y garantizar que se realice correctamente con la URL específica. Ademas con la linea `beforeEach(function() { loadFixtures('movie_row.html'); });` se carga un conjunto de datos de prueba (movie_row.html) antes de entrar a la prueba (it) dentro del bloque.FInalmente el bloque de prueba `describe('when successful server call', function() {...}:` simula una llamada exitosa al servidor cuando se hace clic en un enlace de película. Luego, verifica que como resultado de esta llamada, el elemento con id 'movieInfo' se vuelve visible y contiene el título de la película 'Casablanca'.
+El codigo anterior inicia un bloque de pruebas relacionado con el componente MoviePopup, ademas todas las pruebas dentro de este bloque se centraran en este componente específico. Ahora, vamos a analizar el bloque `escribe('setup', function() {...}`, este bloque  organiza pruebas relacionadas con la configuración inicial del componente MoviePopup. Cada prueba dentro de este bloque se centra en aspectos específicos de la configuración inicial y verifica si el componente se encuentra en el estado deseado después de la configuración. El siguiente bloque `describe('clicking on movie link', function() {}`verifica que al hacer clic en un enlace de películas, se realiza una llamada Ajax a la URL '/movies/1'. Se utiliza spyOn para rastrear las llamadas a la función ajax y garantizar que se realice correctamente con la URL específica. Ademas con la linea `beforeEach(function() { loadFixtures('movie_row.html'); });` se carga un conjunto de datos de prueba (movie_row.html) antes de entrar a la prueba (it) dentro del bloque.Finalmente el bloque de prueba `describe('when successful server call', function() {...}:` simula una llamada exitosa al servidor cuando se hace clic en un enlace de película. Luego, verifica que como resultado de esta llamada, el elemento con id 'movieInfo' se vuelve visible y contiene el título de la película 'Casablanca'.
 
+### ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado?.
 
-
-### ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado.
-
-En el codigo dado anteriormente podemos apreciar algunas partes donde se aprecia la funcionalidad de spyOn de Jasmine y los stubs, por ejemplo en la linea `spyOn($, 'ajax')` se utiliza para espiar sobre la función $.ajax de jQuery, que es típicamente responsable de realizar solicitudes HTTP. Al espiar sobre ella, podemos rastrear las llamadas y controlar su comportamiento.<br> y en las pruebas dentro del bloque `describe('when successful server call', function() {...})`, los stubs se utilizan para simular una llamada exitosa al servidor. Se espía sobre $.ajax y se reemplaza con una función falsa que ejecuta la función de éxito con contenido simulado.
+Podemos apreciar algunas partes donde se observa la funcionalidad de spyOn de Jasmine y los stubs, por ejemplo en `spyOn($, 'ajax').and.callFake(function(ajaxArgs) { ajaxArgs.success(htmlResponse, '200');});` se utiliza spyOn para espiar el método $.ajax, y and.callFake se utiliza para establecer un comportamiento falso (un stub) para el método espíado. En este caso, cuando se llama a `$.ajax` en lugar de realizar una solicitud real al servidor, se llama a la función falsa proporcionada en and.callFake, que simula una respuesta exitosa del servidor.
 
 
+### Pregunta ¿Que hacen las siguientes líneas del código anterior?. ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado?.
 
 ```javascript
 it('calls correct URL', function() {
@@ -139,14 +138,13 @@ it('calls correct URL', function() {
       expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');
     });
 ```
-
-### Pregunta:¿Que hacen las siguientes líneas del código anterior?.
-
 La línea de código `it('calls correct URL', function() {...}` define un ejemplo específico de prueba dentro de un bloque describe en Jasmine para corroborar que la prueba verifique que se realice una llamada a la URL correcta.
-la linea `spyOn($, 'ajax');` dentro del codigo anterior, se utiliza spyOn de Jasmine para crear un espía en la función ajax de jQuery  para rastrear llamadas a una función y observar su comportamiento durante las pruebas, lo que permitira rastrear las llamadas a la función ajax durante la ejecución de la prueba sin cambiar su comportamiento.
+la linea `spyOn($, 'ajax');` se utiliza  para crear un espía en la función ajax de jQuery  para rastrear llamadas a una función y observar su comportamiento durante las pruebas.
 La siguiente linea `$('#movies a').trigger('click');` simula la acción del usuario al hacer clic en un enlace de películas, lo que debería activar una llamada Ajax.
-Finalemente, `expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');`   en esta linea estamos usando la funcionalidad del espía creado por spyOn para realizar una afirmación. Verifica que la última llamada a la función ajax se haya hecho con la URL esperada ('/movies/1'). Con ello simulamos que el clic en el enlace de películas haya realizado una llamada Ajax con la URL correcta, con el fin de verificar que la lógica relacionada con Ajax se está ejecutando correctamente. 
+Finalemente, `expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');`  usa la funcionalidad del espía creado por spyOn para realizar una afirmación. Verifica que la última llamada a la función ajax se haya hecho con la URL esperada ('/movies/1'). Con ello simulamos que el clic en el enlace de películas haya realizado una llamada Ajax con la URL correcta, con el fin de verificar que la lógica relacionada con Ajax se está ejecutando correctamente. 
 
+
+### Pregunta:¿Qupe hacen las siguientes líneas del código anterior?.
 
 ```javascript
 
@@ -163,6 +161,9 @@ Finalemente, `expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/
         expect($('#movieInfo').text()).toContain('Casablanca');
 
 ```
+
+Primero se utiliza readFixtures para cargar el contenido del archivo 'movie_info.html' y almacenarlo en la variable htmlResponse.
+Despues, se utiliza `spyOn` para espiar la función `$.ajax` y luego se emplea `and.callFake` para proporcionar una implementación falsa de la función espiada. En este caso, se reemplaza la función $.ajax con una función falsa que simula una respuesta exitosa del servidor `(ajaxArgs.success(htmlResponse, '200'))`. En `$('#movies a').trigger('click');` se simula la interacción del usuario al hacer clic en un enlace que esta dentro del elemento con el id movies que desencadenaría una llamada AJAX. Luego, se realiza las pruebas de Visibilidad y Contenido, donde en la primera prueba se verifica que el elemento con el id 'movieInfo' sea visible después de la llamada AJAX simulada. En la segunda prueba, verifica que el texto dentro del elemento con el id movieInfo contiene la cadena 'Casablanca', lo que indica que la información de la película se colocó correctamente en el contenedor después de la llamada AJAX simulada.
 
 ### Pregunta: Dado que Jasmine carga todos los ficheros JavaScript antes de ejecutar ningún ejemplo, la llamada a setup (línea 34 del codigo siguiente llamado movie_popup.js)ocurre antes de que se ejecuten nuestras pruebas, comprueba que dicha función hace su trabajo y muestra los resultados.
 
@@ -205,6 +206,100 @@ $(MoviePopup.setup);
 
 
 ```
+La funcion setup en el archivo movie_popup.js  hace que se cree un elemento div con el id 'movieInfo' y se oculta inicialmente, este elemento se agrega al final del cuerpo 
+del documento, tambien configura un evento de clic para los enlaces (<a>) dentro de los elementos con el id 'movies', de tal manera que cuando se hace clic en uno de estos enlaces, se llama a la función MoviePopup.getMovieInfo. Por consiguiente, Las líneas 2 a 9 en movie_popup_spec.js verifican si la función MoviePopup.setup configura correctamente el div flotante que se utilizará para mostrar la información de la película. Las líneas 10 a 32 verifican el comportamiento del código AJAX sin llamar realmente al servidor RottenPotatoes evitando la llamada AJAX.
+
+![Captura de pantalla de 2023-12-03 04-10-58](https://github.com/miguelvega/Pruebas-JS-Ajax/assets/124398378/040b39f1-aaf4-4dc7-89af-9d91aa062605)
+
+
+
 
 ### Pregunta: Indica cuales son los stubs y fixtures disponibles en Jasmine y Jasmine-jQuery.
 
+En Jasmine, el término "stubs" a menudo se utiliza en el contexto de mocks (simulacros). Un "stub" es una función simulada que reemplaza una función real durante las pruebas. Jasmine proporciona funciones como jasmine.createSpy para crear mocks y realizar afirmaciones sobre cómo se llaman y qué valores devuelven.
+
+En el contexto de Jasmine-jQuery, las "fixtures" son fragmentos de código HTML que se cargan en el DOM durante las pruebas para simular la presencia de elementos HTML específicos. Jasmine-jQuery proporciona funciones como loadFixtures para cargar archivos HTML y readFixtures para acceder al contenido de esos archivos.
+
+En resumen, Jasmine proporciona "stubs" a través de mocks para reemplazar funciones reales, y Jasmine-jQuery proporciona "fixtures" para cargar fragmentos HTML en el DOM durante las pruebas.
+
+### Pregunta: Como en RSpec, Jasmine permite ejecutar código de inicialización y desmantelamiento de pruebas utilizando beforeEach y afterEach. El código de inicialización carga el fixture HTML mostrado en el código siguiente, para imitar el entorno que el manejador getMovieInfo vería si fuera llamado después de mostrar la lista de películas.
+
+```
+<div id="movies">
+  <div class="row">
+    <div class="col-8"><a href="/movies/1">Casablanca</a></div>
+    <div class="col-2">PG</div>
+    <div class="col-2">1943-01-23</div>
+  </div>
+</div>
+
+```
+En el entorno de Jasmine, las funciones beforeEach y afterEach desempeñan un papel crucial al permitir la ejecución de código de preparación y limpieza antes y después de la realización de cada prueba. Estas funciones son esenciales para establecer un contexto inicial consistente y asegurar que cualquier cambio o estado creado durante una prueba no afecte a las pruebas siguientes. De esta manera, proporcionan un marco estructurado para garantizar la integridad y la independencia entre las diversas pruebas en una suite de pruebas Jasmine.
+
+
+**Ejercicios**
+
+1. Un inconveniente de la herencia de prototipos es que todos los atributos (propiedades) de los objetos son públicos. (Recuerda que en Ruby, ningún atributo era
+público). Sin embargo, podemos aprovechar las clausuras para obtener atributos privados. Crea un sencillo constructor para los objetos `User` que acepte un nombre de usuario y una contraseña, y proporciona un método `checkPassword` que indique si la contraseña proporcionada es correcta, pero que deniegue la inspección de la contraseña en sí. Esta expresión de `sólo métodos de acceso` se usa ampliamente en jQuery.
+```
+function User(username, password) {
+  let privatePassword = password;
+
+  this.checkPassword = function(inputPassword) {
+    return inputPassword === privatePassword;
+  };
+}
+
+
+```
+
+2. Supongamos que no puede modificar el código del servidor para añadir la clase CSS adult a las filas de la tabla movies. ¿Cómo identificaría las filas que están ocultas utilizando sólo código JavaScript del lado cliente?
+
+Para identificar filas ocultas sin modificar el código del servidor, podríamos emplear código para encontrar y almacenar en un array todas las filas que no son visibles en la página, para realizar operaciones específicas en esas filas o para realizar un seguimiento de la información oculta.
+
+
+3. Escribe el código AJAX necesario para crear menús en cascada basados en una asociación `has_many`. Esto es, dados los modelos de Rails A y B, donde A `has_many` (tiene muchos) B, el primer menú de la pareja tiene que listar las opciones de A, y cuando se selecciona una, devolver las opciones de B correspondientes y rellenar el menú B.
+
+Supongamos que tienes dos modelos en Rails, ModelA y ModelB, donde ModelA tiene muchas instancias de ModelB:
+```ruby
+class ModelA < ActiveRecord::Base
+  has_many :model_bs
+end
+
+class ModelB < ActiveRecord::Base
+  belongs_to :model_a
+end
+
+```
+Luego, en nuestro controlador de Rails, podemos añadir una acción que responda a las solicitudes AJAX para obtener las opciones del segundo menú
+
+```ruby
+
+class ModelsController < ApplicationController
+  def get_model_bs
+    model_a = ModelA.find(params[:model_a_id])
+    model_bs = model_a.model_bs
+
+    render json: model_bs
+  end
+end
+```
+Ahora en Ahora emplearemos codigo JavaScript, utilizando jQuery de la siguiente manera
+
+
+   
+4. Extienda la función de validación en ActiveModel para generar automáticamente código JavaScript que valide las entradas del formulario antes de que sea enviado. Por ejemplo, puesto que el modelo `Movie` de `RottenPotatoes` requiere que el título de cada película sea distinto de la cadena vacía, el código JavaScript debería evitar que el formulario `Add New Movie` se enviara si no se cumplen los criterios de validación, mostrar un mensaje de ayuda al usuario, y resaltar el(los) campo(s) del formulario que ocasionaron los problemas de validación. Gestiona, al menos, las validaciones integradas, como que los títulos sean distintos de cadena vacía, que las longitudes máxima y mínima de la cadena de caracteres sean correctas, que los valores numéricos estén dentro de los límites de los rangos, y para puntos adicionales, realiza las validaciones basándose en expresiones regulares.
+
+Creamos nuestras validaciones dentro de nuestro modelo :
+
+```ruby
+# En el modelo Ruby (Rails)
+class Movie < ActiveRecord::Base
+  validates :title, presence: true, uniqueness: true
+  validates :length, numericality: { greater_than: 0 }
+  # Otros validadores...
+end
+
+```
+
+Y creamos código JavaScript para validar automáticamente el formulario 
