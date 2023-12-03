@@ -116,8 +116,9 @@ describe('MoviePopup', function() {
 });
 ```
 
+![Captura de pantalla de 2023-12-02 23-43-13](https://github.com/miguelvega/Pruebas-JS-Ajax/assets/124398378/e9351868-125d-457e-9b9f-69aed156879b)
 
-
+Este error suele ocurrir cuando jQuery no se ha cargado correctamente antes de que se ejecuten las pruebas, esto debido a que "ReferenceError: $ is not defined" indica que en el momento en que Jasmine está ejecutando las pruebas, la biblioteca jQuery ($) no está disponible.
 
 ### Pregunta ¿Que hacen las siguientes líneas del código anterior?. ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado.
 
