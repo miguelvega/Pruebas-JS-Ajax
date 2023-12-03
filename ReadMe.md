@@ -216,3 +216,24 @@ del documento, tambien configura un evento de clic para los enlaces (<a>) dentro
 
 ### Pregunta: Indica cuales son los stubs y fixtures disponibles en Jasmine y Jasmine-jQuery.
 
+En Jasmine, el término "stubs" a menudo se utiliza en el contexto de mocks (simulacros). Un "stub" es una función simulada que reemplaza una función real durante las pruebas. Jasmine proporciona funciones como jasmine.createSpy para crear mocks y realizar afirmaciones sobre cómo se llaman y qué valores devuelven.
+
+En el contexto de Jasmine-jQuery, las "fixtures" son fragmentos de código HTML que se cargan en el DOM durante las pruebas para simular la presencia de elementos HTML específicos. Jasmine-jQuery proporciona funciones como loadFixtures para cargar archivos HTML y readFixtures para acceder al contenido de esos archivos.
+
+En resumen, Jasmine proporciona "stubs" a través de mocks para reemplazar funciones reales, y Jasmine-jQuery proporciona "fixtures" para cargar fragmentos HTML en el DOM durante las pruebas.
+
+### Pregunta: Como en RSpec, Jasmine permite ejecutar código de inicialización y desmantelamiento de pruebas utilizando beforeEach y afterEach. El código de inicialización carga el fixture HTML mostrado en el código siguiente, para imitar el entorno que el manejador getMovieInfo vería si fuera llamado después de mostrar la lista de películas.
+
+```
+<div id="movies">
+  <div class="row">
+    <div class="col-8"><a href="/movies/1">Casablanca</a></div>
+    <div class="col-2">PG</div>
+    <div class="col-2">1943-01-23</div>
+  </div>
+</div>
+
+```
+En Jasmine, beforeEach y afterEach permiten ejecutar código de inicialización y desmantelamiento antes y después de cada prueba, respectivamente.
+
+
