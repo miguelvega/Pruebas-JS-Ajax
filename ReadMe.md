@@ -126,7 +126,7 @@ El codigo anterior inicia un bloque de pruebas relacionado con el componente Mov
 
 ### ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado?.
 
-Podemos apreciar algunas partes donde se observa la funcionalidad de spyOn de Jasmine y los stubs, por ejemplo en `spyOn($, 'ajax').and.callFake(function(ajaxArgs) { ajaxArgs.success(htmlResponse, '200');});` se utiliza spyOn para espiar el método $.ajax, y and.callFake se utiliza para establecer un comportamiento falso (un stub) para el método espíado. En este caso, cuando se llama a $.ajax, en lugar de realizar una solicitud real al servidor, se llama a la función falsa proporcionada en and.callFake, que simula una respuesta exitosa del servidor.
+Podemos apreciar algunas partes donde se observa la funcionalidad de spyOn de Jasmine y los stubs, por ejemplo en `spyOn($, 'ajax').and.callFake(function(ajaxArgs) { ajaxArgs.success(htmlResponse, '200');});` se utiliza spyOn para espiar el método $.ajax, y and.callFake se utiliza para establecer un comportamiento falso (un stub) para el método espíado. En este caso, cuando se llama a `$.ajax` en lugar de realizar una solicitud real al servidor, se llama a la función falsa proporcionada en and.callFake, que simula una respuesta exitosa del servidor.
 
 
 ### Pregunta ¿Que hacen las siguientes líneas del código anterior?. ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado?.
@@ -206,6 +206,13 @@ $(MoviePopup.setup);
 
 
 ```
+La funcion setup en el archivo movie_popup.js  hace que se cree un elemento div con el id 'movieInfo' y se oculta inicialmente, este elemento se agrega al final del cuerpo 
+del documento, tambien configura un evento de clic para los enlaces (<a>) dentro de los elementos con el id 'movies', de tal manera que cuando se hace clic en uno de estos enlaces, se llama a la función MoviePopup.getMovieInfo. Por consiguiente, Las líneas 2 a 9 en movie_popup_spec.js verifican si la función MoviePopup.setup configura correctamente el div flotante que se utilizará para mostrar la información de la película. Las líneas 10 a 32 verifican el comportamiento del código AJAX sin llamar realmente al servidor RottenPotatoes evitando la llamada AJAX.
+
+![Captura de pantalla de 2023-12-03 04-10-58](https://github.com/miguelvega/Pruebas-JS-Ajax/assets/124398378/040b39f1-aaf4-4dc7-89af-9d91aa062605)
+
+
+
 
 ### Pregunta: Indica cuales son los stubs y fixtures disponibles en Jasmine y Jasmine-jQuery.
 
