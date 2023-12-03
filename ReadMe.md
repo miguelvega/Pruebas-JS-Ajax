@@ -302,4 +302,4 @@ end
 
 ```
 
-Y creamos código JavaScript para validar automáticamente el formulario 
+Y creamos código JavaScript para validar automáticamente el formulario.
