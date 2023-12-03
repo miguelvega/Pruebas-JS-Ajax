@@ -120,17 +120,16 @@ describe('MoviePopup', function() {
 
 Este error suele ocurrir cuando jQuery no se ha cargado correctamente antes de que se ejecuten las pruebas, esto debido a que "ReferenceError: $ is not defined" indica que en el momento en que Jasmine está ejecutando las pruebas, la biblioteca jQuery ($) no está disponible.
 
-### Pregunta ¿Que hacen las siguientes líneas del código anterior?. ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado.
+### Pregunta ¿Que hacen las líneas del código anterior?.
 
-El codigo anterior inicia un bloque de pruebas relacionado con el componente MoviePopup, ademas todas las pruebas dentro de este bloque se centraran en este componente específico. Ahora, vamos a analizar el bloque `escribe('setup', function() {...}`, este bloque  organiza pruebas relacionadas con la configuración inicial del componente MoviePopup. Cada prueba dentro de este bloque se centra en aspectos específicos de la configuración inicial y verifica si el componente se encuentra en el estado deseado después de la configuración. El siguiente bloque `describe('clicking on movie link', function() {}`verifica que al hacer clic en un enlace de películas, se realiza una llamada Ajax a la URL '/movies/1'. Se utiliza spyOn para rastrear las llamadas a la función ajax y garantizar que se realice correctamente con la URL específica. Ademas con la linea `beforeEach(function() { loadFixtures('movie_row.html'); });` se carga un conjunto de datos de prueba (movie_row.html) antes de entrar a la prueba (it) dentro del bloque.FInalmente el bloque de prueba `describe('when successful server call', function() {...}:` simula una llamada exitosa al servidor cuando se hace clic en un enlace de película. Luego, verifica que como resultado de esta llamada, el elemento con id 'movieInfo' se vuelve visible y contiene el título de la película 'Casablanca'.
+El codigo anterior inicia un bloque de pruebas relacionado con el componente MoviePopup, ademas todas las pruebas dentro de este bloque se centraran en este componente específico. Ahora, vamos a analizar el bloque `escribe('setup', function() {...}`, este bloque  organiza pruebas relacionadas con la configuración inicial del componente MoviePopup. Cada prueba dentro de este bloque se centra en aspectos específicos de la configuración inicial y verifica si el componente se encuentra en el estado deseado después de la configuración. El siguiente bloque `describe('clicking on movie link', function() {}`verifica que al hacer clic en un enlace de películas, se realiza una llamada Ajax a la URL '/movies/1'. Se utiliza spyOn para rastrear las llamadas a la función ajax y garantizar que se realice correctamente con la URL específica. Ademas con la linea `beforeEach(function() { loadFixtures('movie_row.html'); });` se carga un conjunto de datos de prueba (movie_row.html) antes de entrar a la prueba (it) dentro del bloque.Finalmente el bloque de prueba `describe('when successful server call', function() {...}:` simula una llamada exitosa al servidor cuando se hace clic en un enlace de película. Luego, verifica que como resultado de esta llamada, el elemento con id 'movieInfo' se vuelve visible y contiene el título de la película 'Casablanca'.
 
+### ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado?.
 
-
-### ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado.
-
-En el codigo dado anteriormente podemos apreciar algunas partes donde se aprecia la funcionalidad de spyOn de Jasmine y los stubs, por ejemplo en la linea `spyOn($, 'ajax')` se utiliza para espiar sobre la función $.ajax de jQuery, que es típicamente responsable de realizar solicitudes HTTP. Al espiar sobre ella, podemos rastrear las llamadas y controlar su comportamiento.<br> y en las pruebas dentro del bloque `describe('when successful server call', function() {...})`, los stubs se utilizan para simular una llamada exitosa al servidor. Se espía sobre $.ajax y se reemplaza con una función falsa que ejecuta la función de éxito con contenido simulado.
+Podemos apreciar algunas partes donde se observa la funcionalidad de spyOn de Jasmine y los stubs, por ejemplo en `spyOn($, 'ajax').and.callFake(function(ajaxArgs) { ajaxArgs.success(htmlResponse, '200');});` se utiliza spyOn para espiar el método $.ajax, y and.callFake se utiliza para establecer un comportamiento falso (un stub) para el método espíado. En este caso, cuando se llama a $.ajax, en lugar de realizar una solicitud real al servidor, se llama a la función falsa proporcionada en and.callFake, que simula una respuesta exitosa del servidor.
 
 
+### Pregunta ¿Que hacen las siguientes líneas del código anterior?. ¿Cuál es el papel de spyOn de Jasmine y los stubs en el código dado?.
 
 ```javascript
 it('calls correct URL', function() {
@@ -139,14 +138,13 @@ it('calls correct URL', function() {
       expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');
     });
 ```
-
-### Pregunta:¿Que hacen las siguientes líneas del código anterior?.
-
 La línea de código `it('calls correct URL', function() {...}` define un ejemplo específico de prueba dentro de un bloque describe en Jasmine para corroborar que la prueba verifique que se realice una llamada a la URL correcta.
-la linea `spyOn($, 'ajax');` dentro del codigo anterior, se utiliza spyOn de Jasmine para crear un espía en la función ajax de jQuery  para rastrear llamadas a una función y observar su comportamiento durante las pruebas, lo que permitira rastrear las llamadas a la función ajax durante la ejecución de la prueba sin cambiar su comportamiento.
+la linea `spyOn($, 'ajax');` se utiliza  para crear un espía en la función ajax de jQuery  para rastrear llamadas a una función y observar su comportamiento durante las pruebas.
 La siguiente linea `$('#movies a').trigger('click');` simula la acción del usuario al hacer clic en un enlace de películas, lo que debería activar una llamada Ajax.
-Finalemente, `expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');`   en esta linea estamos usando la funcionalidad del espía creado por spyOn para realizar una afirmación. Verifica que la última llamada a la función ajax se haya hecho con la URL esperada ('/movies/1'). Con ello simulamos que el clic en el enlace de películas haya realizado una llamada Ajax con la URL correcta, con el fin de verificar que la lógica relacionada con Ajax se está ejecutando correctamente. 
+Finalemente, `expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/1');`  usa la funcionalidad del espía creado por spyOn para realizar una afirmación. Verifica que la última llamada a la función ajax se haya hecho con la URL esperada ('/movies/1'). Con ello simulamos que el clic en el enlace de películas haya realizado una llamada Ajax con la URL correcta, con el fin de verificar que la lógica relacionada con Ajax se está ejecutando correctamente. 
 
+
+### Pregunta:¿Qupe hacen las siguientes líneas del código anterior?.
 
 ```javascript
 
@@ -163,6 +161,9 @@ Finalemente, `expect($.ajax.calls.mostRecent().args[0]['url']).toEqual('/movies/
         expect($('#movieInfo').text()).toContain('Casablanca');
 
 ```
+
+Primero se utiliza readFixtures para cargar el contenido del archivo 'movie_info.html' y almacenarlo en la variable htmlResponse.
+Despues, se utiliza `spyOn` para espiar la función `$.ajax` y luego se emplea `and.callFake` para proporcionar una implementación falsa de la función espiada. En este caso, se reemplaza la función $.ajax con una función falsa que simula una respuesta exitosa del servidor `(ajaxArgs.success(htmlResponse, '200'))`. En `$('#movies a').trigger('click');` se simula la interacción del usuario al hacer clic en un enlace que esta dentro del elemento con el id movies que desencadenaría una llamada AJAX. Luego, se realiza las pruebas de Visibilidad y Contenido, donde en la primera prueba se verifica que el elemento con el id 'movieInfo' sea visible después de la llamada AJAX simulada. En la segunda prueba, verifica que el texto dentro del elemento con el id movieInfo contiene la cadena 'Casablanca', lo que indica que la información de la película se colocó correctamente en el contenedor después de la llamada AJAX simulada.
 
 ### Pregunta: Dado que Jasmine carga todos los ficheros JavaScript antes de ejecutar ningún ejemplo, la llamada a setup (línea 34 del codigo siguiente llamado movie_popup.js)ocurre antes de que se ejecuten nuestras pruebas, comprueba que dicha función hace su trabajo y muestra los resultados.
 
