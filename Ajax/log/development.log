@@ -3730,3 +3730,25 @@ Processing by JasmineRails::SpecRunnerController#index as HTML
 Completed 200 OK in 24ms (Views: 22.8ms | ActiveRecord: 0.0ms | Allocations: 15803)
 
 
+Started GET "/" for 127.0.0.1 at 2023-12-03 04:10:53 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/movies" for 127.0.0.1 at 2023-12-03 04:10:53 -0500
+Processing by MoviesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering movies/index.html.erb within layouts/application
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT "movies".* FROM "movies"[0m
+  ↳ app/views/movies/index.html.erb:11
+  Rendered movies/index.html.erb within layouts/application (Duration: 18.3ms | Allocations: 19465)
+  Rendered layout layouts/application.html.erb (Duration: 204.9ms | Allocations: 87454)
+Completed 200 OK in 250ms (Views: 210.4ms | ActiveRecord: 1.0ms | Allocations: 98545)
+
+
+Started GET "/movies/1" for 127.0.0.1 at 2023-12-03 04:10:55 -0500
+Processing by MoviesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mMovie Load (0.1ms)[0m  [1m[34mSELECT "movies".* FROM "movies" WHERE "movies"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/movies_controller.rb:7:in `show'
+  Rendered movies/_movie.html.erb (Duration: 1.0ms | Allocations: 393)
+Completed 200 OK in 5ms (Views: 3.1ms | ActiveRecord: 0.1ms | Allocations: 3378)
+
+
