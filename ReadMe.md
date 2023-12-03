@@ -234,6 +234,72 @@ En resumen, Jasmine proporciona "stubs" a través de mocks para reemplazar funci
 </div>
 
 ```
-En Jasmine, beforeEach y afterEach permiten ejecutar código de inicialización y desmantelamiento antes y después de cada prueba, respectivamente.
+En el entorno de Jasmine, las funciones beforeEach y afterEach desempeñan un papel crucial al permitir la ejecución de código de preparación y limpieza antes y después de la realización de cada prueba. Estas funciones son esenciales para establecer un contexto inicial consistente y asegurar que cualquier cambio o estado creado durante una prueba no afecte a las pruebas siguientes. De esta manera, proporcionan un marco estructurado para garantizar la integridad y la independencia entre las diversas pruebas en una suite de pruebas Jasmine.
 
 
+**Ejercicios**
+
+1. Un inconveniente de la herencia de prototipos es que todos los atributos (propiedades) de los objetos son públicos. (Recuerda que en Ruby, ningún atributo era
+público). Sin embargo, podemos aprovechar las clausuras para obtener atributos privados. Crea un sencillo constructor para los objetos `User` que acepte un nombre de usuario y una contraseña, y proporciona un método `checkPassword` que indique si la contraseña proporcionada es correcta, pero que deniegue la inspección de la contraseña en sí. Esta expresión de `sólo métodos de acceso` se usa ampliamente en jQuery.
+```
+function User(username, password) {
+  let privatePassword = password;
+
+  this.checkPassword = function(inputPassword) {
+    return inputPassword === privatePassword;
+  };
+}
+
+
+```
+
+2. Supongamos que no puede modificar el código del servidor para añadir la clase CSS adult a las filas de la tabla movies. ¿Cómo identificaría las filas que están ocultas utilizando sólo código JavaScript del lado cliente?
+
+Para identificar filas ocultas sin modificar el código del servidor, podríamos emplear código para encontrar y almacenar en un array todas las filas que no son visibles en la página, para realizar operaciones específicas en esas filas o para realizar un seguimiento de la información oculta.
+
+
+3. Escribe el código AJAX necesario para crear menús en cascada basados en una asociación `has_many`. Esto es, dados los modelos de Rails A y B, donde A `has_many` (tiene muchos) B, el primer menú de la pareja tiene que listar las opciones de A, y cuando se selecciona una, devolver las opciones de B correspondientes y rellenar el menú B.
+
+Supongamos que tienes dos modelos en Rails, ModelA y ModelB, donde ModelA tiene muchas instancias de ModelB:
+```ruby
+class ModelA < ActiveRecord::Base
+  has_many :model_bs
+end
+
+class ModelB < ActiveRecord::Base
+  belongs_to :model_a
+end
+
+```
+Luego, en nuestro controlador de Rails, podemos añadir una acción que responda a las solicitudes AJAX para obtener las opciones del segundo menú
+
+```ruby
+
+class ModelsController < ApplicationController
+  def get_model_bs
+    model_a = ModelA.find(params[:model_a_id])
+    model_bs = model_a.model_bs
+
+    render json: model_bs
+  end
+end
+```
+Ahora en Ahora emplearemos codigo JavaScript, utilizando jQuery de la siguiente manera
+
+
+   
+4. Extienda la función de validación en ActiveModel para generar automáticamente código JavaScript que valide las entradas del formulario antes de que sea enviado. Por ejemplo, puesto que el modelo `Movie` de `RottenPotatoes` requiere que el título de cada película sea distinto de la cadena vacía, el código JavaScript debería evitar que el formulario `Add New Movie` se enviara si no se cumplen los criterios de validación, mostrar un mensaje de ayuda al usuario, y resaltar el(los) campo(s) del formulario que ocasionaron los problemas de validación. Gestiona, al menos, las validaciones integradas, como que los títulos sean distintos de cadena vacía, que las longitudes máxima y mínima de la cadena de caracteres sean correctas, que los valores numéricos estén dentro de los límites de los rangos, y para puntos adicionales, realiza las validaciones basándose en expresiones regulares.
+
+Creamos nuestras validaciones dentro de nuestro modelo :
+
+```ruby
+# En el modelo Ruby (Rails)
+class Movie < ActiveRecord::Base
+  validates :title, presence: true, uniqueness: true
+  validates :length, numericality: { greater_than: 0 }
+  # Otros validadores...
+end
+
+```
+
+Y creamos código JavaScript para validar automáticamente el formulario 
